@@ -8,7 +8,7 @@ import {
   watermarkedInputMessage,
 } from "./reducer";
 
-const app = (initModel, reducer, view) => {
+const app = async (initModel, reducer, view) => {
   const dispatch = (message) => {
     model = reducer(message, model);
     const newView = view(dispatch, model);
@@ -20,7 +20,19 @@ const app = (initModel, reducer, view) => {
   let currentView = view(dispatch, model);
   console.log(currentView); // Production
   dispatch(currentIdMessage(0));
-  console.log(model);
+
+  const signatureBuffer = await sharp(path.join("signature", "signature.png"))
+    .resize(1000)
+    .toBuffer();
+
+  sharp(path.join("input", "chair.jpg"))
+    .composite([
+      {
+        input: signatureBuffer,
+        gravity: "southeast",
+      },
+    ])
+    .toFile(path.join("out", "out.jpg"));
 };
 
 export default app;
