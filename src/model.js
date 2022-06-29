@@ -3,16 +3,13 @@ const initModel = {
   targetDir: "output",
   signatureDir: "signature",
   signature: "signature.png",
-
   sizePercent: 15,
-  offsetX: 10,
-  offsetY: 10,
-
+  // Current image
   currentId: 0,
   source: null,
   watermarked: false,
   target: null,
-
+  // List of images
   images: [
     {
       id: 0,

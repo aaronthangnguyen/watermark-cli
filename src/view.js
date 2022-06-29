@@ -1,7 +1,7 @@
 import * as R from "ramda";
 
 const view = (dispatch, model) => {
-  const { images } = model;
+  const { images, source } = model;
   return R.join("\n", [progressBar(images)]);
 };
 
